@@ -5,7 +5,13 @@ declare let gapi: any;
 
 export interface GoogleLoginProviderOptions {
   client_id: string;
+  cookie_policy?: string;
+  scope?: string;
+  fetch_basic_profile?: boolean;
+  hosted_domain?: string;
+  openid_realm?: string;
   ux_mode?: string;
+  redirect_uri?: string;
 }
 
 export class GoogleLoginProvider extends BaseLoginProvider {
