@@ -15,7 +15,6 @@ export interface GoogleLoginProviderOptions {
   app_package_name?: string;
   openid_realm?: string;
   include_granted_scopes?: boolean;
-  test?: string;
   ux_mode?: string;
   redirect_uri?: string;
 }
