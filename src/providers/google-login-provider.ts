@@ -3,15 +3,31 @@ import { SocialUser, LoginProviderClass } from '../entities/user';
 
 declare let gapi: any;
 
+export interface GoogleLoginProviderOptions {
+  client_id: string;
+  scope?: string;
+  response_type?: string;
+  prompt?: string;
+  cookie_policy?: string;
+  hosted_domain?: string;
+  fetch_basic_profile?: boolean;
+  login_hint?: string;
+  app_package_name?: string;
+  openid_realm?: string;
+  include_granted_scopes?: boolean;
+  ux_mode?: string;
+  redirect_uri?: string;
+}
+
 export class GoogleLoginProvider extends BaseLoginProvider {
 
   public static readonly PROVIDER_ID = 'google';
   public loginProviderObj: LoginProviderClass = new LoginProviderClass();
   private auth2: any;
 
-  constructor(private clientId: string) {
+  constructor(private options: GoogleLoginProviderOptions) {
     super();
-    this.loginProviderObj.id = clientId;
+    this.loginProviderObj.id = options.client_id;
     this.loginProviderObj.name = 'google';
     this.loginProviderObj.url = 'https://apis.google.com/js/platform.js';
   }
@@ -20,10 +36,7 @@ export class GoogleLoginProvider extends BaseLoginProvider {
     return new Promise((resolve, reject) => {
       this.loadScript(this.loginProviderObj, () => {
           gapi.load('auth2', () => {
-            this.auth2 = gapi.auth2.init({
-              client_id: this.clientId,
-              scope: 'email'
-            });
+            this.auth2 = gapi.auth2.init(this.options);
 
             this.auth2.then(() => {
               if (this.auth2.isSignedIn.get()) {

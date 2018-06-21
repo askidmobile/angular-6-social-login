@@ -5,6 +5,7 @@ import { BehaviorSubject } from 'rxjs';
 
 import { LoginProvider } from './entities/login-provider';
 import { SocialUser } from './entities/user';
+import { MAT_CHIPS_DEFAULT_OPTIONS } from '@angular/material';
 
 export interface AuthServiceConfigItem {
   id: string;
@@ -34,6 +35,10 @@ export class AuthService {
 
   get authState(): Observable<SocialUser> {
     return this._authState.asObservable();
+  }
+
+  get user(): SocialUser {
+    return this._user;
   }
 
   constructor(config: AuthServiceConfig) {
