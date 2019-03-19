@@ -27,7 +27,7 @@ export class VkontakteLoginProvider extends BaseLoginProvider {
                     if (response.status === 'connected') {
                         VK.Api.call('users.get', {user_id: response.session.mid, fields: 'photo_max,contacts', v: '5.78'},
                              (res: any) => {
-                                 resolve(VkontakteLoginProvider.drawUser(Object.assign({}, {token: response.session.sig}, res.response[0])));
+                                 resolve(VkontakteLoginProvider.drawUser(Object.assign({}, {token: response.session.access_token}, res.response[0])));
 
                             }
                         );
@@ -53,7 +53,7 @@ export class VkontakteLoginProvider extends BaseLoginProvider {
                 if (response.status === 'connected') {
                     VK.Api.call('users.get', {user_id: response.session.mid, fields: 'photo_max,contacts', v: '5.78'},
                         (res: any) => {
-                            resolve(VkontakteLoginProvider.drawUser(Object.assign({}, {token: response.session.sig}, res.response[0])));
+                            resolve(VkontakteLoginProvider.drawUser(Object.assign({}, {token: response.session.access_token}, res.response[0])));
 
                         }
                     );
@@ -68,7 +68,7 @@ export class VkontakteLoginProvider extends BaseLoginProvider {
                 if (response.status === 'connected') {
                     VK.Api.call('users.get', {user_id: response.session.mid, fields: 'photo_max,contacts', v: '5.78'},
                         (res: any) => {
-                            resolve(VkontakteLoginProvider.drawUser(Object.assign({}, {token: response.session.sig}, res.response[0])));
+                            resolve(VkontakteLoginProvider.drawUser(Object.assign({}, {token: response.session.access_token}, res.response[0])));
                         }
                     );
                 }
